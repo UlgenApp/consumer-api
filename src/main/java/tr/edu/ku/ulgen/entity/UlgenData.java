@@ -19,7 +19,7 @@ public class UlgenData {
     @Id
     private Long userId;
     private Integer activeUsers;
-    private Long latitude;
-    private Long longitude;
+    private Double latitude;
+    private Double longitude;
     private String userCity;
 }
