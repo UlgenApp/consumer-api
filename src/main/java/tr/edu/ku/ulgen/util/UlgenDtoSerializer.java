@@ -17,7 +17,7 @@ public class UlgenDtoSerializer implements Serializer<UlgenDto> {
     @Override
     public byte[] serialize(String topic, UlgenDto ulgenDto) {
         try {
-            if (ulgenDto == null){
+            if (ulgenDto == null) {
                 System.out.println("Null received at serializing.");
                 return null;
             }

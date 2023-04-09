@@ -29,9 +29,9 @@ public class KafkaListenerService {
                 .saveOrUpdate(UlgenData.builder()
                         .userId(ulgenDto.getUserId())
                         .activeUsers(ulgenDto.getActiveUser())
-                        .latitude(ulgenDto.getLocation()[0])
-                        .longitude(ulgenDto.getLocation()[1])
+                        .latitude(ulgenDto.getLocation().getLatitude())
+                        .longitude(ulgenDto.getLocation().getLongitude())
                         .userCity(ulgenDto.getUserCity())
-                .build());
+                        .build());
     }
 }
