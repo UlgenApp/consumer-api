@@ -2,6 +2,7 @@ package tr.edu.ku.ulgen.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.persistence.PersistenceException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -25,13 +26,18 @@ public class KafkaListenerService {
 
         log.info("Mapped raw message to the UlgenDto.");
 
-        ulgenDataRepository
-                .saveOrUpdate(UlgenData.builder()
-                        .userId(ulgenDto.getUserId())
-                        .activeUsers(ulgenDto.getActiveUser())
-                        .latitude(ulgenDto.getLocation().getLatitude())
-                        .longitude(ulgenDto.getLocation().getLongitude())
-                        .userCity(ulgenDto.getUserCity())
-                        .build());
+        try {
+            ulgenDataRepository
+                    .saveOrUpdate(UlgenData.builder()
+                            .userId(ulgenDto.getUserId())
+                            .activeUsers(ulgenDto.getActiveUser())
+                            .latitude(ulgenDto.getLocation().getLatitude())
+                            .longitude(ulgenDto.getLocation().getLongitude())
+                            .userCity(ulgenDto.getUserCity())
+                            .build());
+        } catch (PersistenceException e) {
+            log.error("Could not run saveOrUpdate on the database.");
+            log.error("Database is not reachable, {}", e.getMessage());
+        }
     }
 }
