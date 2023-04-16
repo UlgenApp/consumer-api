@@ -8,6 +8,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * UlgenData is an entity class representing the data model
+ * for Ulgen entities stored in the database. It contains information
+ * such as user ID, number of active users, latitude, longitude, and user's city.
+ *
+ * @author Kaan Turkmen
+ */
 @Data
 @Builder
 @NoArgsConstructor

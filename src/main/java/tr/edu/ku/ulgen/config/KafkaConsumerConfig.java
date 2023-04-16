@@ -16,12 +16,24 @@ import tr.edu.ku.ulgen.util.UlgenDtoSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * KafkaConsumerConfig class is responsible for creating and configuring Kafka Consumer beans.
+ * It reads the required configuration properties from the application properties file.
+ * The class is marked with the @Configuration annotation to indicate that it is a Spring configuration class.
+ *
+ * @author Kaan Turkmen
+ */
 @Configuration
 public class KafkaConsumerConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServer;
 
+    /**
+     * Produces a Map containing the Kafka consumer configuration properties.
+     *
+     * @return a Map<String, Object> containing the configuration properties for the Kafka consumer.
+     */
     public Map<String, Object> consumerConfig() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
@@ -31,11 +43,22 @@ public class KafkaConsumerConfig {
         return props;
     }
 
+    /**
+     * Creates a ConsumerFactory bean for creating Kafka consumers.
+     *
+     * @return a ConsumerFactory<String, UlgenDto> instance configured with the consumer properties.
+     */
     @Bean
     public ConsumerFactory<String, UlgenDto> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfig());
     }
 
+    /**
+     * Creates a KafkaListenerContainerFactory bean for creating Kafka listener containers.
+     *
+     * @param consumerFactory the ConsumerFactory<String, UlgenDto> instance used to create Kafka consumers.
+     * @return a KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, UlgenDto>> instance configured with the given consumerFactory.
+     */
     @Bean
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, UlgenDto>> factory(ConsumerFactory<String, UlgenDto> consumerFactory) {
         ConcurrentKafkaListenerContainerFactory<String, UlgenDto> factory = new ConcurrentKafkaListenerContainerFactory<>();

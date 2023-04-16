@@ -11,12 +11,27 @@ import tr.edu.ku.ulgen.dto.UlgenDto;
 import tr.edu.ku.ulgen.entity.UlgenData;
 import tr.edu.ku.ulgen.repository.UlgenDataRepository;
 
+/**
+ * KafkaListenerService is a class responsible for listening to
+ * the Kafka topic 'ulgen' and processing the received messages.
+ * It deserializes the received messages into UlgenDto instances,
+ * and then saves or updates the corresponding UlgenData entities
+ * in the database using the UlgenDataRepository.
+ *
+ * @author Kaan Turkmen
+ */
 @Component
 @AllArgsConstructor
 @Slf4j
 public class KafkaListenerService {
     private UlgenDataRepository ulgenDataRepository;
 
+    /**
+     * Method that listens for messages on the 'ulgen' topic and processes them.
+     *
+     * @param raw the raw message received from the Kafka topic.
+     * @throws JsonProcessingException if there is an error when deserializing the raw message.
+     */
     @KafkaListener(topics = "ulgen", groupId = "groupId")
     void listener(String raw) throws JsonProcessingException {
         log.info("Raw message is received by the listener: {}", raw);
