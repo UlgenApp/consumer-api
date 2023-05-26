@@ -9,7 +9,7 @@ import java.util.Map;
 
 /**
  * UlgenDtoSerializer class is a custom Kafka serializer implementation for serializing
- * UlgenDto objects into byte arrays. This class implements the Serializer<UlgenDto> interface
+ * UlgenDto objects into byte arrays. This class implements the Serializer interface
  * and uses the Jackson ObjectMapper for serialization.
  *
  * @author Kaan Turkmen

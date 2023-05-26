@@ -32,7 +32,7 @@ public class KafkaConsumerConfig {
     /**
      * Produces a Map containing the Kafka consumer configuration properties.
      *
-     * @return a Map<String, Object> containing the configuration properties for the Kafka consumer.
+     * @return a Map containing the configuration properties for the Kafka consumer.
      */
     public Map<String, Object> consumerConfig() {
         Map<String, Object> props = new HashMap<>();
@@ -46,7 +46,7 @@ public class KafkaConsumerConfig {
     /**
      * Creates a ConsumerFactory bean for creating Kafka consumers.
      *
-     * @return a ConsumerFactory<String, UlgenDto> instance configured with the consumer properties.
+     * @return a ConsumerFactory instance configured with the consumer properties.
      */
     @Bean
     public ConsumerFactory<String, UlgenDto> consumerFactory() {
@@ -56,8 +56,8 @@ public class KafkaConsumerConfig {
     /**
      * Creates a KafkaListenerContainerFactory bean for creating Kafka listener containers.
      *
-     * @param consumerFactory the ConsumerFactory<String, UlgenDto> instance used to create Kafka consumers.
-     * @return a KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, UlgenDto>> instance configured with the given consumerFactory.
+     * @param consumerFactory the ConsumerFactory instance used to create Kafka consumers.
+     * @return a KafkaListenerContainerFactory instance configured with the given consumerFactory.
      */
     @Bean
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, UlgenDto>> factory(ConsumerFactory<String, UlgenDto> consumerFactory) {
