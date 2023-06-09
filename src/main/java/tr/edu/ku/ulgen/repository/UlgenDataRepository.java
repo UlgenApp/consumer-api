@@ -38,6 +38,7 @@ public interface UlgenDataRepository extends JpaRepository<UlgenData, Long> {
             existingData.setActiveUsers(ulgenData.getActiveUsers());
             existingData.setLatitude(ulgenData.getLatitude());
             existingData.setLongitude(ulgenData.getLongitude());
+            existingData.setUserCity(ulgenData.getUserCity());
             save(existingData);
             System.out.println(ulgenData + " is updated.");
         }
